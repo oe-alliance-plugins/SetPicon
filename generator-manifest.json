@@ -1,0 +1,24 @@
+{
+  "depends": "",
+  "description": "assignment picons for services",
+  "legacy_setup": {
+    "description": "assignment picons for services",
+    "has_setup_translate": true,
+    "name": "enigma2-plugin-extensions-setpicon",
+    "package_data": [],
+    "package_dir_value": "",
+    "packages": [],
+    "pkg": "Extensions.SetPicon",
+    "version": "0.53"
+  },
+  "module_dir_name": "SetPicon",
+  "package_name": "enigma2-plugin-extensions-setpicon",
+  "plugin_group": "extensions",
+  "source_repo_branch": "python3",
+  "source_repo_name": "e2openplugin-SetPicon",
+  "source_repo_url": "https://github.com/E2OpenPlugins/e2openplugin-SetPicon.git",
+  "target_repo_branch": "main",
+  "target_repo_name": "SetPicon",
+  "target_repo_url": "git@github.com:oe-alliance-plugins/SetPicon.git",
+  "version": "0.53"
+}

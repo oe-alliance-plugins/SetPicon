@@ -35,7 +35,6 @@ from Components.Button import Button
 from enigma import eTimer, eEnv
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
-import six
 
 TEMP = "/tmp/"
 STARTDIR = "/picon/"
@@ -732,8 +731,16 @@ class setPicon(Screen, HelpableScreen):
 		return ""
 
 	def name2str(self, serviceName):
-		serviceName = unicodedata.normalize('NFKD', six.text_type(serviceName, 'utf_8')).encode('ASCII', 'ignore')
-		serviceName = re.sub('[^a-z0-9]', '', serviceName.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+		if isinstance(serviceName, bytes):
+			serviceName = serviceName.decode('utf-8', 'ignore')
+		elif serviceName is None:
+			serviceName = ''
+		else:
+			serviceName = str(serviceName)
+		serviceName = unicodedata.normalize('NFKD', serviceName)
+		serviceName = serviceName.encode('ASCII', 'ignore').decode('ASCII')
+		serviceName = serviceName.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()
+		serviceName = re.sub('[^a-z0-9]', '', serviceName)
 		return serviceName
 
 	def getOrbitalPosition(self, serviceRef, revert=False):
