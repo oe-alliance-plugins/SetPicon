@@ -1,5 +1,5 @@
 from __future__ import print_function
-# for localized messages  	 
+# for localized messages
 from . import _
 #
 #  Set Picon - Plugin E2
@@ -18,7 +18,9 @@ VERSION = 0.53
 #  GNU General Public License for more details.
 #
 
-import os, re, unicodedata
+import os
+import re
+import unicodedata
 import shutil
 from enigma import ePicLoad, getDesktop
 from Plugins.Plugin import PluginDescriptor
@@ -47,19 +49,19 @@ MOVED = STARTDIR
 
 LAMEDB = eEnv.resolve('${sysconfdir}/enigma2/lamedb')
 
-config.plugins.setpicon.type = ConfigSelection(default = "0", choices = [("0", _("service reference")), ("1", _("name"))])
+config.plugins.setpicon.type = ConfigSelection(default="0", choices=[("0", _("service reference")), ("1", _("name"))])
 config.plugins.setpicon.source = ConfigDirectory(SOURCE)
 config.plugins.setpicon.target = ConfigDirectory(TARGET)
-config.plugins.setpicon.allpicons = ConfigSelection(default = "0", choices = [("0", _("all picon's directories")), ("1", _("input directory only"))])
+config.plugins.setpicon.allpicons = ConfigSelection(default="0", choices=[("0", _("all picon's directories")), ("1", _("input directory only"))])
 config.plugins.setpicon.name_orbitpos = ConfigYesNo(default=False)
-config.plugins.setpicon.filename = ConfigSelection(default = "0", choices = [("0", _("no")), ("1", _("filename")), ("2", _("full path"))])
+config.plugins.setpicon.filename = ConfigSelection(default="0", choices=[("0", _("no")), ("1", _("filename")), ("2", _("full path"))])
 config.plugins.setpicon.bookmarks = ConfigLocations(default=[SOURCE])
 config.plugins.setpicon.save2backtoo = ConfigYesNo(default=False)
 config.plugins.setpicon.backup = ConfigDirectory(BACKUP)
-config.plugins.setpicon.backupsort = ConfigSelection(default = "0", choices = [("0", _("no")), ("1", _("by providers")), ("2", _("by orbital position"))])
-config.plugins.setpicon.filter = ConfigSelection(default = "0", choices = [("0", _("all")), ("1", _("as service reference only")), ("2", _("as names only"))])
+config.plugins.setpicon.backupsort = ConfigSelection(default="0", choices=[("0", _("no")), ("1", _("by providers")), ("2", _("by orbital position"))])
+config.plugins.setpicon.filter = ConfigSelection(default="0", choices=[("0", _("all")), ("1", _("as service reference only")), ("2", _("as names only"))])
 config.plugins.setpicon.zap = ConfigYesNo(default=False)
-config.plugins.setpicon.sorting = ConfigSelection(default = "0", choices = [("0", _("unsorted")), ("1", _("sorted")), ("2", _("sorted in reverse order"))])
+config.plugins.setpicon.sorting = ConfigSelection(default="0", choices=[("0", _("unsorted")), ("1", _("sorted")), ("2", _("sorted in reverse order"))])
 config.plugins.setpicon.fill = ConfigYesNo(default=False)
 config.plugins.setpicon.move = ConfigYesNo(default=False)
 config.plugins.setpicon.moved = ConfigDirectory(MOVED)
@@ -83,15 +85,16 @@ MOVED = cfg.moved.value
 
 EXT = ".png"
 
+
 class setPicon(Screen, HelpableScreen):
 	skin = """
 	<screen name="setPicon" position="center,center" size="560,330" title="SetPicon">
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
-		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" /> 
-		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
-		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
+		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 
@@ -153,7 +156,7 @@ class setPicon(Screen, HelpableScreen):
 			"yellow": (self.searching, _("search picons or service")),
 			"blue": (self.callConfig, _("options")),
 			"1": (self.firstPicon, _("go to first picon")),
-			"3": (self.lastPicon, _("go to last picon")),			
+			"3": (self.lastPicon, _("go to last picon")),
 			"first": (self.minusPiconV, _("go to -5 picons")),
 			"4": (self.minusPiconC, _("go to -100 picons")),
 			"7": (self.minusPiconM, _("go to -1000 picons")),
@@ -242,7 +245,7 @@ class setPicon(Screen, HelpableScreen):
 			self.menu.append((_("Save %s bouquet's picons to backup directory only") % (self.bouquetname), 4))
 			self.menu.append((_("Delete picons in backup directory %s") % BACKUP, 5))
 
-		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Operations with picons"), list=self.menu, selection = self.selection)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Operations with picons"), list=self.menu, selection=self.selection)
 
 	def menuCallback(self, choice):
 		if choice is None:
@@ -254,7 +257,7 @@ class setPicon(Screen, HelpableScreen):
 		elif selected == 1:
 			self.copyAllToOutput()
 		elif selected == 2:
-			self.deleteTarget()			
+			self.deleteTarget()
 		elif selected == 3:
 			self.deleteSource()
 		elif selected == 4:
@@ -278,7 +281,7 @@ class setPicon(Screen, HelpableScreen):
 		if service:
 			self.name = ServiceReference(service).getServiceName()
 			self.refstr = ':'.join(service.toString().split(':')[:11])
-			self.orbital =  self.getOrbitalPosition(self.refstr)
+			self.orbital = self.getOrbitalPosition(self.refstr)
 			if self.orbital == _("Playback"):
 				return
 			self.provider = self.getProviderName(self.refstr)
@@ -315,7 +318,7 @@ class setPicon(Screen, HelpableScreen):
 		path = SOURCE + self.picon[self.idx] + EXT
 		if fileExists(path):
 			print("[SetPicon] copy", path, TARGET + filename + EXT)
-			self.copy( path, TARGET + filename + EXT )
+			self.copy(path, TARGET + filename + EXT)
 			if cfg.save2backtoo.value:
 				self.saveToBackup(self.refstr, path, filename)
 			self.displayCurServicePicon()
@@ -338,7 +341,7 @@ class setPicon(Screen, HelpableScreen):
 			self.displayPicon()
 			self.search = False
 		else:
-			self.session.openWithCallback(self.setSameDirectories, MessageBox, _("Input directory and output directory are same!"), MessageBox.TYPE_ERROR, timeout=5 )
+			self.session.openWithCallback(self.setSameDirectories, MessageBox, _("Input directory and output directory are same!"), MessageBox.TYPE_ERROR, timeout=5)
 
 	def setSameDirectories(self, answer):
 		return
@@ -346,16 +349,16 @@ class setPicon(Screen, HelpableScreen):
 	def savePicon(self, item, bouquet=False, backuponly=False):
 		# note: item[0] name, item[1] service reference
 		refstr = self.ref2str(item[1])
-		if cfg.allpicons.value == "1":	#input directory only
+		if cfg.allpicons.value == "1":  # input directory only
 			path = SOURCE + self.name2str(item[0]) + EXT
 			if not fileExists(path):
-				path = SOURCE + refstr + EXT # look for old filename
+				path = SOURCE + refstr + EXT  # look for old filename
 		else: 				# from all directories
 			path = self.getInternalPicon(item[1])
 			if not fileExists(path):
 				path = self.getInternalPiconOld(refstr)  # look for old filename
 		filename = refstr
-		if cfg.type.value == "1": # name
+		if cfg.type.value == "1":  # name
 			filename = self.name2str(item[0])
 			if cfg.name_orbitpos.value:
 				filename += "_" + self.getOrbitalPosition(item[1])
@@ -363,12 +366,12 @@ class setPicon(Screen, HelpableScreen):
 			if not bouquet:
 				print("[SetPicon] copy", path, TARGET + filename + EXT)
 			if not backuponly:
-				self.copy( path, TARGET + filename + EXT )
+				self.copy(path, TARGET + filename + EXT)
 			if cfg.save2backtoo.value:
 				self.saveToBackup(item[1], path, filename, bouquet)
 			if not self.picon.count(filename):
 				self.picon.append(filename)
-				self.maxPicons+=1
+				self.maxPicons += 1
 		else:
 			print("[SetPicon] path %s not exist" % path)
 
@@ -385,7 +388,7 @@ class setPicon(Screen, HelpableScreen):
 				os.makedirs(directory)
 		if not bouquet:
 			print("[SetPicon] copy2", path, directory + filename + EXT)
-		self.copy( path, directory + filename + EXT )
+		self.copy(path, directory + filename + EXT)
 
 	def trueName(self, name):
 		name = name.replace('/', '_').replace('\\', '_').replace('&', '_').replace('\'', '').replace('"', '').replace('`', '').replace('*', '_').replace('?', '_').replace(' ', '_').replace('(', '_').replace(')', '_')
@@ -420,7 +423,7 @@ class setPicon(Screen, HelpableScreen):
 		index = 0
 		founded = False
 		for item in self.ServicesList:
-			(service, refstr, name, nameo, orbital ) = self.getStrings(item)
+			(service, refstr, name, nameo, orbital) = self.getStrings(item)
 			if service == refstr or service == name or service == nameo:
 				founded = True
 				self.refstr = item[1]
@@ -455,7 +458,7 @@ class setPicon(Screen, HelpableScreen):
 	def getStrings(self, item):
 		name = self.name2str(item[0])
 		orbital = self.getOrbitalPosition(item[1])
-		return ( self.picon[self.idx], self.ref2str(item[1]), self.name2str(item[0]), name + "_" + orbital, orbital)
+		return (self.picon[self.idx], self.ref2str(item[1]), self.name2str(item[0]), name + "_" + orbital, orbital)
 
 	def setSearchService(self):
 		self.search_picon = False
@@ -479,15 +482,15 @@ class setPicon(Screen, HelpableScreen):
 		self.picon = []
 		for filename in os.listdir(SOURCE):
 			if filename.endswith('.png'):
-				if os.path.isfile(SOURCE+filename):
-					if cfg.filter.value == "0": # all
+				if os.path.isfile(SOURCE + filename):
+					if cfg.filter.value == "0":  # all
 						self.picon.append(filename[:-4])
 						self.maxPicons += 1
-					elif cfg.filter.value == "1": # service_ref only
+					elif cfg.filter.value == "1":  # service_ref only
 						if filename[0:3] == "1_0":
 							self.picon.append(filename[:-4])
 							self.maxPicons += 1
-					elif cfg.filter.value == "2": # names only
+					elif cfg.filter.value == "2":  # names only
 						if filename[0:3] != "1_0":
 							self.picon.append(filename[:-4])
 							self.maxPicons += 1
@@ -540,7 +543,7 @@ class setPicon(Screen, HelpableScreen):
 	def displayFoundedPicon(self):
 		text = _("Search")
 		if len(self.searchList) != 1:
-			text += " (%s/%s)" % (self.fidx+1, len(self.searchList))
+			text += " (%s/%s)" % (self.fidx + 1, len(self.searchList))
 		self["key_yellow"].setText(text)
 		self.displayPath("%s" % self.picon[self.searchList[self.fidx]])
 		self.gotoPicon(self.searchList[self.fidx], True)
@@ -551,21 +554,21 @@ class setPicon(Screen, HelpableScreen):
 		if cfg.filename.value == "0":
 			text = ""
 		if cfg.filename.value == "1":
-			text = text[text.rfind('/')+1:]
+			text = text[text.rfind('/') + 1:]
 		self["path"].setText(text)
 
 	def copyAllToOutput(self):
 		if SOURCE != TARGET:
 			for filename in os.listdir(SOURCE):
 				if filename.endswith('.png'):
-					if os.path.isfile(SOURCE+filename):
+					if os.path.isfile(SOURCE + filename):
 						try:
 							filename = os.path.join(SOURCE, filename)
 							self.copy(filename, TARGET)
 						except IOError as e:
 							print("Failed copy all", e, filename)
 		else:
-			self.session.openWithCallback(self.setSameDirectories, MessageBox, _("Input directory and output directory are same!"), MessageBox.TYPE_ERROR, timeout=5 )
+			self.session.openWithCallback(self.setSameDirectories, MessageBox, _("Input directory and output directory are same!"), MessageBox.TYPE_ERROR, timeout=5)
 
 	def deleteTarget(self):
 		self.rmPath = TARGET
@@ -584,9 +587,9 @@ class setPicon(Screen, HelpableScreen):
 		if BACKUP != SOURCE and BACKUP != TARGET:
 			return True
 		return False
-		
+
 	def confirmDelete(self, path):
-		self.session.openWithCallback(self.deleteAllPicons, MessageBox, _("Are You sure delete all picons in %s ?") % path, MessageBox.TYPE_YESNO, default=False )
+		self.session.openWithCallback(self.deleteAllPicons, MessageBox, _("Are You sure delete all picons in %s ?") % path, MessageBox.TYPE_YESNO, default=False)
 
 	def deleteAllPicons(self, answer=False):
 		if answer is True:
@@ -615,9 +618,9 @@ class setPicon(Screen, HelpableScreen):
 
 	def firstPicon(self):
 		self.gotoPicon(0, True)
-		
+
 	def lastPicon(self):
-		self.gotoPicon(self.maxPicons-1, True)
+		self.gotoPicon(self.maxPicons - 1, True)
 
 	def plusPiconV(self):
 		self.gotoPicon(5)
@@ -648,23 +651,23 @@ class setPicon(Screen, HelpableScreen):
 
 	def displayPicon(self):
 		if len(self.picon):
-			path = SOURCE + self.picon[(self.idx-2) % self.maxPicons] + EXT
+			path = SOURCE + self.picon[(self.idx - 2) % self.maxPicons] + EXT
 			if fileExists(path):
 				self.piconLoad2l.startDecode(path)
-			path = SOURCE + self.picon[(self.idx-1) % self.maxPicons] + EXT
+			path = SOURCE + self.picon[(self.idx - 1) % self.maxPicons] + EXT
 			if fileExists(path):
 				self.piconLoad1l.startDecode(path)
 			path = SOURCE + self.picon[self.idx] + EXT
 			if fileExists(path):
 				self.piconLoad.startDecode(path)
 				self.displayPath(path)
-			path = SOURCE + self.picon[(self.idx+1) % self.maxPicons] + EXT
+			path = SOURCE + self.picon[(self.idx + 1) % self.maxPicons] + EXT
 			if fileExists(path):
 				self.piconLoad1p.startDecode(path)
-			path = SOURCE + self.picon[(self.idx+2) %self.maxPicons] + EXT
+			path = SOURCE + self.picon[(self.idx + 2) % self.maxPicons] + EXT
 			if fileExists(path):
 				self.piconLoad2p.startDecode(path)
-			self.displayMsg("%s/%s" % (self.idx+1, self.maxPicons))
+			self.displayMsg("%s/%s" % (self.idx + 1, self.maxPicons))
 			if self.blocked:
 				self.servicePiconRefresh()
 		else:
@@ -692,13 +695,13 @@ class setPicon(Screen, HelpableScreen):
 			self.name = self.ServicesList[self.sidx][0]
 			self.refstr = self.ServicesList[self.sidx][1]
 			self.zapToService(self.refstr)
-			self.orbital =  self.getOrbitalPosition(self.refstr)
+			self.orbital = self.getOrbitalPosition(self.refstr)
 			self.servicePiconRefresh()
 
 	def getInternalPicon(self, serviceRef):
 		from Components.Renderer.Picon import getPiconName
 		return getPiconName(serviceRef)
-	
+
 	def getInternalPiconOld(self, serviceRef):
 		if self.lastPath:
 			pngname = self.lastPath + serviceRef + EXT
@@ -761,7 +764,7 @@ class setPicon(Screen, HelpableScreen):
 	def addGrade(self, orbital):
 		if orbital in (_("Terrestrial"), _("Cable"), _("Stream"), _("Playback")):
 			return orbital
-		return orbital[:-1]+ b"\xc2\xb0 ".decode('utf-8') + orbital[-1:]
+		return orbital[:-1] + b"\xc2\xb0 ".decode('utf-8') + orbital[-1:]
 
 	def deleteSelectedPicon(self):
 		if not len(self.picon):
@@ -770,16 +773,16 @@ class setPicon(Screen, HelpableScreen):
 		if cfg.move.value:
 			self.removePicon(True)
 		else:
-			self.session.openWithCallback(self.removePicon, MessageBox, _("Are You sure delete picon?\n%s") % self.removePath, MessageBox.TYPE_YESNO, default=False )
+			self.session.openWithCallback(self.removePicon, MessageBox, _("Are You sure delete picon?\n%s") % self.removePath, MessageBox.TYPE_YESNO, default=False)
 
 	def removePicon(self, answer):
 		if answer is True:
 			if fileExists(self.removePath):
 				if cfg.move.value:
-					self.copy( self.removePath, self.removePath.replace(SOURCE, MOVED))
+					self.copy(self.removePath, self.removePath.replace(SOURCE, MOVED))
 				os.unlink(self.removePath)
 			self.picon.pop(self.idx)
-			self.maxPicons-=1
+			self.maxPicons -= 1
 			self.search = False
 			if self.maxPicons:
 				self.idx %= self.maxPicons
@@ -819,7 +822,7 @@ class setPicon(Screen, HelpableScreen):
 #		REFTYPE:FLAGS:STYPE:SID:TSID:ONID:NS:PARENT_SID:PARENT_TSID:UNUSED
 #		D       D     X     X   X    X    X  X          X           X
 
-		ref = [ int(x, 0x10) for x in ref.split(':')[:10]]
+		ref = [int(x, 0x10) for x in ref.split(':')[:10]]
 		ref = "%04x:%08x:%04x:%04x:%d" % (ref[3], ref[6], ref[4], ref[5], ref[2])
 		for i in self.providers:
 			p = i[0].split(':')
@@ -832,11 +835,11 @@ class setPicon(Screen, HelpableScreen):
 		lamedb = open(LAMEDB, "r")
 		lines = lamedb.readlines()
 		lamedb.close()
-		lines = lines[lines.index("services\n")+1:-2]
+		lines = lines[lines.index("services\n") + 1:-2]
 		provider = ""
 		for i in range(0, len(lines), 3):
 			ref = lines[i].split("\n")[0]
-			prov = lines[i+2].split("\n")[0].split(',')
+			prov = lines[i + 2].split("\n")[0].split(',')
 			if len(prov) and prov[0][0] == 'p':
 				provider = prov[0].split(':')[1]
 				if not len(provider):
@@ -866,7 +869,7 @@ class setPicon(Screen, HelpableScreen):
 				self.displayPicon()
 			else:
 				if cfg.sorting.value == "0":
-					self.getStoredPicons()	
+					self.getStoredPicons()
 				else:
 					self.sortPicons()
 					self.displayPicon()
@@ -918,21 +921,25 @@ class setPicon(Screen, HelpableScreen):
 		if ptr != None:
 			self["picon2l"].instance.setPixmap(ptr.__deref__())
 			self["picon2l"].show()
+
 	def showPicon1l(self, picInfo=None):
 		ptr = self.piconLoad1l.getData()
 		if ptr != None:
 			self["picon1l"].instance.setPixmap(ptr.__deref__())
 			self["picon1l"].show()
+
 	def showPicon(self, picInfo=None):
 		ptr = self.piconLoad.getData()
 		if ptr != None:
 			self["picon"].instance.setPixmap(ptr.__deref__())
 			self["picon"].show()
+
 	def showPicon1p(self, picInfo=None):
 		ptr = self.piconLoad1p.getData()
 		if ptr != None:
 			self["picon1p"].instance.setPixmap(ptr.__deref__())
 			self["picon1p"].show()
+
 	def showPicon2p(self, picInfo=None):
 		ptr = self.piconLoad2p.getData()
 		if ptr != None:
@@ -946,15 +953,16 @@ class setPicon(Screen, HelpableScreen):
 			self["nowpicon"].show()
 ###
 
+
 class setPiconCfg(Screen, ConfigListScreen):
 	skin = """
 	<screen name="setPiconCfg" position="center,center" size="560,430" title="SetPicon Setup">
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap name="green"  position="140,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
-		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" /> 
+		<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap name="blue"   position="420,0" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
 
-		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" /> 
+		<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 		<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 		<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 		<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
@@ -974,7 +982,7 @@ class setPiconCfg(Screen, ConfigListScreen):
 		self.skin = setPiconCfg.skin
 		self.skin_path = plugin_path
 		self.setup_title = _("SetPicon Setup")
-			
+
 		self["key_green"] = Label(_("Save"))
 		self["key_red"] = Label(_("Cancel"))
 		self["key_yellow"] = Label(_("Swap Dirs"))
@@ -995,7 +1003,7 @@ class setPiconCfg(Screen, ConfigListScreen):
 
 		self.onChangedEntry = []
 		self.refreshMenu()
-		ConfigListScreen.__init__(self, self.setPiconCfglist, session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.setPiconCfglist, session, on_change=self.changedEntry)
 
 		self.onShown.append(self.setWindowTitle)
 
@@ -1035,14 +1043,18 @@ class setPiconCfg(Screen, ConfigListScreen):
 		self.refresh()
 		for x in self.onChangedEntry:
 			x()
+
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
+
 	def getCurrentValue(self):
 		return str(self["config"].getCurrent()[1].getText())
+
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 	###
+
 	def setWindowTitle(self):
 		self.setTitle(_("SetPicon Setup"))
 
@@ -1062,17 +1074,17 @@ class setPiconCfg(Screen, ConfigListScreen):
 			txt = _("Output directory for created Picons")
 			self.session.openWithCallback(self.targetDirSelected, LocationBox, text=txt, currDir=cfg.target.value,
 							bookmarks=cfg.bookmarks, autoAdd=False, editDir=True,
-							inhibitDirs=self.inhibitDirs, minFree=10 ) # in MB
+							inhibitDirs=self.inhibitDirs, minFree=10)  # in MB
 		elif currentry == self.backup_entry:
 			txt = _("Backup directory for Picons")
 			self.session.openWithCallback(self.backupDirSelected, LocationBox, text=txt, currDir=cfg.backup.value,
 							bookmarks=cfg.bookmarks, autoAdd=False, editDir=True,
-							inhibitDirs=self.inhibitDirs, minFree=10 ) # in MB
+							inhibitDirs=self.inhibitDirs, minFree=10)  # in MB
 		elif currentry == self.moved_entry:
 			txt = _("Directory for removed Picons")
 			self.session.openWithCallback(self.movedDirSelected, LocationBox, text=txt, currDir=cfg.moved.value,
 							bookmarks=cfg.bookmarks, autoAdd=False, editDir=True,
-							inhibitDirs=self.inhibitDirs, minFree=10 ) # in MB
+							inhibitDirs=self.inhibitDirs, minFree=10)  # in MB
 
 	def sourceDirSelected(self, res):
 		if res is not None:
@@ -1099,7 +1111,7 @@ class setPiconCfg(Screen, ConfigListScreen):
 				return
 
 	def backupWarning(self):
-		self.session.open( MessageBox, _("Backup directory cannot be same as Input or Output directories !"), MessageBox.TYPE_ERROR, timeout=5 )
+		self.session.open(MessageBox, _("Backup directory cannot be same as Input or Output directories !"), MessageBox.TYPE_ERROR, timeout=5)
 
 	def swapDirs(self):
 		tmp = cfg.target.value
@@ -1109,7 +1121,7 @@ class setPiconCfg(Screen, ConfigListScreen):
 		self["config"].invalidate(self["config"].list[self.setPiconCfglist.index(self.target_entry)])
 
 	def bothAsInputDir(self):
-		self.session.openWithCallback(self.sameDirs, MessageBox, _("Do you want set both directory as:\n %s") % cfg.source.value, MessageBox.TYPE_YESNO, default=False )
+		self.session.openWithCallback(self.sameDirs, MessageBox, _("Do you want set both directory as:\n %s") % cfg.source.value, MessageBox.TYPE_YESNO, default=False)
 
 	def sameDirs(self, answer=False):
 		if answer:
@@ -1145,6 +1157,7 @@ class setPiconCfg(Screen, ConfigListScreen):
 	def exit(self):
 		self.keyCancel()
 
+
 def getMemory(par=0x01):
 	try:
 		memory = ""
@@ -1159,20 +1172,22 @@ def getMemory(par=0x01):
 				mf = int(line[1])
 				break
 		mu = mm - mf
-		if par&0x01:
-			memory += "".join((_("mem:"), " %d " % (mm/1024), _("MB"), " "))
-		if par&0x02:
-			memory += "".join((_("used:"), " %.2f%s" % (100.*mu/mm, '%'), " "))
-		if par&0x04:
-			memory += "".join((_("free:"), " %.2f%s" % (100.*mf/mm, '%')))
+		if par & 0x01:
+			memory += "".join((_("mem:"), " %d " % (mm / 1024), _("MB"), " "))
+		if par & 0x02:
+			memory += "".join((_("used:"), " %.2f%s" % (100. * mu / mm, '%'), " "))
+		if par & 0x04:
+			memory += "".join((_("free:"), " %.2f%s" % (100. * mf / mm, '%')))
 		return memory
 	except Exception as e:
 		print("[SetPicon] read file FAIL:", e)
 		return ""
 
+
 def freeMemory():
 	os.system("sync")
 	os.system("echo 3 > /proc/sys/vm/drop_caches")
+
 
 def cleanup():
 	global Session
@@ -1183,21 +1198,24 @@ def cleanup():
 	epg_bouquet = None
 	freeMemory()
 
+
 def closed(ret=False):
 	cleanup()
+
 
 from enigma import eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
 
+
 def getBouquetServices(bouquet):
-	services = [ ]
+	services = []
 	Servicelist = eServiceCenter.getInstance().list(bouquet)
 	if Servicelist:
 		while True:
 			service = Servicelist.getNext()
-			if not service.valid(): #check if end of list
+			if not service.valid():  # check if end of list
 				break
-			if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker): #ignore non playable services
+			if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):  # ignore non playable services
 				continue
 			services.append(ServiceReference(service))
 	return services
