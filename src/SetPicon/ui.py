@@ -33,7 +33,7 @@ from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Components.Renderer.Picon import getPiconName
 
-from enigma import eTimer, eServiceCenter, eServiceReference, ePicLoad, eEnv
+from enigma import eTimer, eServiceCenter, eServiceReference, ePicLoad, eEnv, iServiceInformation
 from ServiceReference import ServiceReference
 
 VERSION = 0.53
@@ -799,12 +799,11 @@ class setPicon(Screen, HelpableScreen):
 		else:
 			provider = self.ref2ProviderName(ref)
 		if provider == "unknown":
-			provider == _("unknown")
+			provider = _("unknown")
 		self["provider"].setText(provider)
 		return provider
 
 	def curProviderName(self):
-		from enigma import iServiceInformation
 		service = self.session.nav.getCurrentService()
 		if service:
 			info = service.info()
