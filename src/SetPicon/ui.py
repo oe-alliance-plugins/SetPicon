@@ -1,4 +1,3 @@
-from __future__ import print_function
 # for localized messages
 from . import _
 #
@@ -6,7 +5,6 @@ from . import _
 #
 #  by ims (c) 2012-2018 ims21@users.sourceforge.net
 #
-VERSION = 0.53
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -22,22 +20,23 @@ import os
 import re
 import unicodedata
 import shutil
-from enigma import ePicLoad, getDesktop
-from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Pixmap import Pixmap
-from Components.config import ConfigSubsection, ConfigDirectory, ConfigSelection, getConfigListEntry, config, ConfigYesNo, ConfigLocations
+from Components.config import ConfigDirectory, ConfigSelection, getConfigListEntry, config, ConfigYesNo, ConfigLocations
 from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
-import enigma
 from Tools.Directories import resolveFilename, fileExists, pathExists
 from Components.Button import Button
-from enigma import eTimer, eEnv
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
+from Components.Renderer.Picon import getPiconName
 
+from enigma import eTimer, eServiceCenter, eServiceReference, ePicLoad, eEnv
+from ServiceReference import ServiceReference
+
+VERSION = 0.53
 TEMP = "/tmp/"
 STARTDIR = "/picon/"
 if not pathExists(STARTDIR):
@@ -399,9 +398,9 @@ class setPicon(Screen, HelpableScreen):
 	def copy(self, source, target):
 		try:
 			shutil.copyfile(source, target)
-		except IOError as e:
+		except OSError as e:
 			print("[SetPicon] copy failed", e)
-		except:
+		except Exception:
 			print("[SetPicon] copy failed - source and target are same!")
 
 	def setWindowTitle(self):
@@ -565,7 +564,7 @@ class setPicon(Screen, HelpableScreen):
 						try:
 							filename = os.path.join(SOURCE, filename)
 							self.copy(filename, TARGET)
-						except IOError as e:
+						except OSError as e:
 							print("Failed copy all", e, filename)
 		else:
 			self.session.openWithCallback(self.setSameDirectories, MessageBox, _("Input directory and output directory are same!"), MessageBox.TYPE_ERROR, timeout=5)
@@ -598,13 +597,13 @@ class setPicon(Screen, HelpableScreen):
 				if filename.endswith('.png'):
 					try:
 						os.unlink(filename)
-					except:
+					except OSError:
 						print("Failed to unlink", filename)
 				else:
 					if self.rmPath == BACKUP:
 						try:
 							shutil.rmtree(filename)
-						except:
+						except OSError:
 							print("Failed rmtree", filename)
 			if self.rmPath == SOURCE:
 				self.getStoredPicons()
@@ -699,7 +698,6 @@ class setPicon(Screen, HelpableScreen):
 			self.servicePiconRefresh()
 
 	def getInternalPicon(self, serviceRef):
-		from Components.Renderer.Picon import getPiconName
 		return getPiconName(serviceRef)
 
 	def getInternalPiconOld(self, serviceRef):
@@ -709,7 +707,6 @@ class setPicon(Screen, HelpableScreen):
 				return pngname
 		try:
 			from Components.Renderer.Picon import searchPaths
-			global searchPaths
 		except Exception as e:
 			print("[SetPicon]", e)
 			try:
@@ -717,7 +714,6 @@ class setPicon(Screen, HelpableScreen):
 				searchPaths = Picon().searchPaths
 			except Exception as e:
 				print("[SetPicon]", e)
-				from enigma import eEnv
 				searchPaths = (eEnv.resolve('${datadir}/enigma2/%s/'), '/media/cf/%s/', '/media/usb/%s/')
 
 		for path in searchPaths:
@@ -878,23 +874,23 @@ class setPicon(Screen, HelpableScreen):
 ### for graphics
 	def initGraphic(self):
 		self["picon2l"] = Pixmap()
-		self.piconLoad2l = enigma.ePicLoad()
+		self.piconLoad2l = ePicLoad()
 		self.piconLoad2l.PictureData.get().append(self.showPicon2l)
 		self["picon1l"] = Pixmap()
-		self.piconLoad1l = enigma.ePicLoad()
+		self.piconLoad1l = ePicLoad()
 		self.piconLoad1l.PictureData.get().append(self.showPicon1l)
 		self["picon"] = Pixmap()
-		self.piconLoad = enigma.ePicLoad()
+		self.piconLoad = ePicLoad()
 		self.piconLoad.PictureData.get().append(self.showPicon)
 		self["picon1p"] = Pixmap()
-		self.piconLoad1p = enigma.ePicLoad()
+		self.piconLoad1p = ePicLoad()
 		self.piconLoad1p.PictureData.get().append(self.showPicon1p)
 		self["picon2p"] = Pixmap()
-		self.piconLoad2p = enigma.ePicLoad()
+		self.piconLoad2p = ePicLoad()
 		self.piconLoad2p.PictureData.get().append(self.showPicon2p)
 
 		self["nowpicon"] = Pixmap()
-		self.nowLoad = enigma.ePicLoad()
+		self.nowLoad = ePicLoad()
 		self.nowLoad.PictureData.get().append(self.showNowPicon)
 
 	def setGraphic(self):
@@ -918,37 +914,37 @@ class setPicon(Screen, HelpableScreen):
 
 	def showPicon2l(self, picInfo=None):
 		ptr = self.piconLoad2l.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["picon2l"].instance.setPixmap(ptr.__deref__())
 			self["picon2l"].show()
 
 	def showPicon1l(self, picInfo=None):
 		ptr = self.piconLoad1l.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["picon1l"].instance.setPixmap(ptr.__deref__())
 			self["picon1l"].show()
 
 	def showPicon(self, picInfo=None):
 		ptr = self.piconLoad.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["picon"].instance.setPixmap(ptr.__deref__())
 			self["picon"].show()
 
 	def showPicon1p(self, picInfo=None):
 		ptr = self.piconLoad1p.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["picon1p"].instance.setPixmap(ptr.__deref__())
 			self["picon1p"].show()
 
 	def showPicon2p(self, picInfo=None):
 		ptr = self.piconLoad2p.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["picon2p"].instance.setPixmap(ptr.__deref__())
 			self["picon2p"].show()
 
 	def showNowPicon(self, picInfo=None):
 		ptr = self.nowLoad.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["nowpicon"].instance.setPixmap(ptr.__deref__())
 			self["nowpicon"].show()
 ###
@@ -1201,10 +1197,6 @@ def cleanup():
 
 def closed(ret=False):
 	cleanup()
-
-
-from enigma import eServiceCenter, eServiceReference
-from ServiceReference import ServiceReference
 
 
 def getBouquetServices(bouquet):
