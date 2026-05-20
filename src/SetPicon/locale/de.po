@@ -270,7 +270,7 @@ msgstr "nur als Namen"
 
 #: ../ui.py:61
 msgid "as service reference only"
-msgstr "nur als Dienstreferenz"
+msgstr "nur als Referenz"
 
 #: ../ui.py:60
 msgid "by orbital position"
@@ -372,7 +372,7 @@ msgstr "Picons oder Dienst suchen"
 
 #: ../ui.py:51
 msgid "service reference"
-msgstr "Dienstreferenz"
+msgstr "Referenz"
 
 #: ../ui.py:143
 msgid "set and save selected picon"
