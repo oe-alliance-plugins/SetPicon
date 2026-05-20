@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: set picon Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-12 22:37+0200\n"
+"POT-Creation-Date: 2026-05-20 16:48+0200\n"
 "PO-Revision-Date: 2012-07-24 00:42+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -364,34 +364,11 @@ msgid "full path"
 msgstr "مسیر کامل "
 
 #
-#: ../ui.py:163
-msgid "go to +100 picons"
-msgstr "برگشت به 100 آیکون تصویری اول"
-
-#
+#: ../ui.py:159 ../ui.py:160 ../ui.py:161 ../ui.py:162 ../ui.py:163
 #: ../ui.py:164
-msgid "go to +1000 picons"
-msgstr "برگشت به 1000 آیکون تصویری اول"
-
-#
-#: ../ui.py:162
-msgid "go to +5 picons"
+#, fuzzy, python-format
+msgid "go to %s picons"
 msgstr "برگشت به 5 آیکون تصویری اول"
-
-#
-#: ../ui.py:160
-msgid "go to -100 picons"
-msgstr "برگشت به 100 آیکون تصویری آخر"
-
-#
-#: ../ui.py:161
-msgid "go to -1000 picons"
-msgstr "برگشت به 1000 آیکون تصویری آخر"
-
-#
-#: ../ui.py:159
-msgid "go to -5 picons"
-msgstr "برگشت به 5 آیکون تصویری آخر"
 
 #
 #: ../ui.py:157

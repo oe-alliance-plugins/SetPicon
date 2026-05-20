@@ -156,12 +156,12 @@ class setPicon(Screen, HelpableScreen):
 			"blue": (self.callConfig, _("options")),
 			"1": (self.firstPicon, _("go to first picon")),
 			"3": (self.lastPicon, _("go to last picon")),
-			"first": (self.minusPiconV, _("go to -5 picons")),
-			"4": (self.minusPiconC, _("go to -100 picons")),
-			"7": (self.minusPiconM, _("go to -1000 picons")),
-			"last": (self.plusPiconV, _("go to +5 picons")),
-			"6": (self.plusPiconC, _("go to +100 picons")),
-			"9": (self.plusPiconM, _("go to +1000 picons")),
+			"first": (self.minusPiconV, _("go to %s picons") % "-5"),
+			"4": (self.minusPiconC, _("go to %s picons") % "-100"),
+			"7": (self.minusPiconM, _("go to %s picons") % "-1000"),
+			"last": (self.plusPiconV, _("go to %s picons") % "+5"),
+			"6": (self.plusPiconC, _("go to %s picons") % "+100"),
+			"9": (self.plusPiconM, _("go to %s picons") % "+1000"),
 			"8": (self.deleteSelectedPicon, _("delete selected picon")),
 			"reload": (self.getStoredPicons, _("refresh")),
 			"service": (self.setSearchService, _("switch searching to service")),
@@ -994,7 +994,7 @@ class setPiconCfg(Screen, ConfigListScreen):
 			"blue": self.bothAsInputDir
 		}, -2)
 
-		self.inhibitDirs = ["/autofs", "/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/tmp", "/usr"]
+		self.inhibitDirs = ["/autofs", "/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/tmp"]
 
 		self.onChangedEntry = []
 		self.refreshMenu()

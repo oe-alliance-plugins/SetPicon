@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-12 22:37+0200\n"
+"POT-Creation-Date: 2026-05-20 16:48+0200\n"
 "PO-Revision-Date: 2026-04-12 22:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,12 +18,12 @@ msgstr ""
 
 #: ../ui.py:1012
 msgid "Accept picons"
-msgstr ""
+msgstr "Picons akzeptieren"
 
 #: ../ui.py:591
 #, python-format
 msgid "Are You sure delete all picons in %s ?"
-msgstr ""
+msgstr "Möchten Sie wirklich alle Picons in %s löschen?"
 
 #: ../ui.py:772
 #, python-format
@@ -31,53 +31,55 @@ msgid ""
 "Are You sure delete picon?\n"
 "%s"
 msgstr ""
+"Möchten Sie das Picon wirklich löschen?\n"
+"%s"
 
 #: ../ui.py:1008
 msgid "Backup directory"
-msgstr ""
+msgstr "Sicherungsverzeichnis"
 
 #: ../ui.py:1109
 msgid "Backup directory cannot be same as Input or Output directories !"
-msgstr ""
+msgstr "Sicherungsverzeichnis darf nicht identisch mit Ein- oder Ausgabeverzeichnis sein!"
 
 #: ../ui.py:1074
 msgid "Backup directory for Picons"
-msgstr ""
+msgstr "Sicherungsverzeichnis für Picons"
 
 #: ../ui.py:754 ../ui.py:761
 msgid "Cable"
-msgstr ""
+msgstr "Kabel"
 
 #: ../ui.py:171 ../ui.py:982
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: ../ui.py:239
 #, python-format
 msgid "Copy all picons from %s to %s"
-msgstr ""
+msgstr "Alle Picons von %s zu %s kopieren"
 
 #: ../ui.py:240 ../ui.py:242
 #, python-format
 msgid "Delete all picons in %s"
-msgstr ""
+msgstr "Alle Picons in %s löschen"
 
 #: ../ui.py:245
 #, python-format
 msgid "Delete picons in backup directory %s"
-msgstr ""
+msgstr "Picons im Sicherungsverzeichnis %s löschen"
 
 #: ../ui.py:1079
 msgid "Directory for removed Picons"
-msgstr ""
+msgstr "Verzeichnis für gelöschte Picons"
 
 #: ../ui.py:1024
 msgid "Display picon's name"
-msgstr ""
+msgstr "Piconname anzeigen"
 
 #: ../ui.py:1026
 msgid "Display picons"
-msgstr ""
+msgstr "Picons anzeigen"
 
 #: ../ui.py:1119
 #, python-format
@@ -85,341 +87,325 @@ msgid ""
 "Do you want set both directory as:\n"
 " %s"
 msgstr ""
+"Möchten Sie beide Verzeichnisse auf folgende setzen:\n"
+" %s"
 
 #: ../ui.py:1025
 msgid "Fully fill rectangles with picons"
-msgstr ""
+msgstr "Rechtecke mit Picons vollständig füllen"
 
 #: ../ui.py:418
 msgid "In menu change input directory or save picons from bouquet."
-msgstr ""
+msgstr "Im Menü Eingabeverzeichnis ändern oder Picons aus Bouquet speichern."
 
 #: ../ui.py:1006
 msgid "Input directory"
-msgstr ""
+msgstr "Eingabeverzeichnis"
 
 #: ../ui.py:343 ../ui.py:570
 msgid "Input directory and output directory are same!"
-msgstr ""
+msgstr "Ein- und Ausgabeverzeichnis sind identisch!"
 
 #: ../ui.py:1064
 msgid "Input directory of Picons"
-msgstr ""
+msgstr "Eingabeverzeichnis für Picons"
 
 #: ../ui.py:1171
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: ../ui.py:1020
 msgid "Move instead delete"
-msgstr ""
+msgstr "Verschieben statt löschen"
 
 #: ../ui.py:1009
 msgid "Move to directory"
-msgstr ""
+msgstr "In Verzeichnis verschieben"
 
 #: ../ui.py:680
 msgid "No picons found!"
-msgstr ""
+msgstr "Keine Picons gefunden!"
 
 #: ../ui.py:439 ../ui.py:540
 msgid "Not found"
-msgstr ""
+msgstr "Nicht gefunden"
 
 #: ../ui.py:247
 msgid "Operations with picons"
-msgstr ""
+msgstr "Operationen mit Picons"
 
 #: ../ui.py:174
 msgid "Options"
-msgstr ""
+msgstr "Optionen"
 
 #: ../ui.py:1007
 msgid "Output directory"
-msgstr ""
+msgstr "Ausgabeverzeichnis"
 
 #: ../ui.py:1069
 msgid "Output directory for created Picons"
-msgstr ""
+msgstr "Ausgabeverzeichnis für erstellte Picons"
 
 #: ../ui.py:284 ../ui.py:749 ../ui.py:761
 msgid "Playback"
-msgstr ""
+msgstr "Wiedergabe"
 
 #: ../ui.py:184
 msgid "Please wait to finishing picon's list..."
-msgstr ""
+msgstr "Bitte warten Sie, bis die Piconliste fertiggestellt ist..."
 
 #: ../ui.py:231
 msgid "Reading picons..."
-msgstr ""
+msgstr "Picons werden gelesen..."
 
 #: ../ui.py:984
 msgid "Same Dirs"
-msgstr ""
+msgstr "Gleiche Verzeichnisse"
 
 #: ../ui.py:981
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: ../ui.py:238
 #, python-format
 msgid "Save %s bouquet's picons to %s"
-msgstr ""
+msgstr "Picons des Bouquets %s zu %s speichern"
 
 #: ../ui.py:244
 #, python-format
 msgid "Save %s bouquet's picons to backup directory only"
-msgstr ""
+msgstr "Picons des Bouquets %s nur im Sicherungsverzeichnis speichern"
 
 #: ../ui.py:172
 msgid "Save current"
-msgstr ""
+msgstr "Aktuell speichern"
 
 #: ../ui.py:1016
 msgid "Save name with orbital position"
-msgstr ""
+msgstr "Namen mit Orbitalposition speichern"
 
 #: ../ui.py:1013
 msgid "Save picon as"
-msgstr ""
+msgstr "Picon speichern unter"
 
 #: ../ui.py:1023
 msgid "Saving current picons from"
-msgstr ""
+msgstr "Speichere aktuelle Picons von"
 
 #: ../ui.py:1030
 msgid "Saving too to backup directory"
-msgstr ""
+msgstr "Auch im Sicherungsverzeichnis speichern"
 
 #: ../ui.py:173 ../ui.py:451 ../ui.py:539 ../ui.py:543
 msgid "Search"
-msgstr ""
+msgstr "Suchen"
 
 #: ../ui.py:473
 msgid "Search: picons"
-msgstr ""
+msgstr "Suche: Picons"
 
 #: ../ui.py:475
 msgid "Search: service"
-msgstr ""
+msgstr "Suche: Dienst"
 
 #: ../ui.py:414
 msgid "Select picon and press OK to assign to current service:"
-msgstr ""
+msgstr "Wählen Sie ein Picon und drücken Sie OK, um es dem aktuellen Dienst zuzuweisen:"
 
 #: ../ui.py:416
 msgid "Select picon and save it with OK to output directory:"
-msgstr ""
+msgstr "Wählen Sie ein Picon und speichern Sie es mit OK im Ausgabeverzeichnis:"
 
 #: ../ui.py:444
 msgid "Service not found"
-msgstr ""
+msgstr "Dienst nicht gefunden"
 
 #: ../plugin.py:44 ../ui.py:134 ../ui.py:407
 msgid "SetPicon"
-msgstr ""
+msgstr "SetPicon"
 
 #: ../ui.py:979 ../ui.py:1054
 msgid "SetPicon Setup"
-msgstr ""
+msgstr "SetPicon-Einrichtung"
 
 #: ../ui.py:1028
 msgid "SetPicon in Channel's menu"
-msgstr ""
+msgstr "SetPicon im Kanalmenü"
 
 #: ../ui.py:1027
 msgid "SetPicon in E-menu"
-msgstr ""
+msgstr "SetPicon im E-Menü"
 
 #: ../ui.py:1031
 msgid "Sorting picons in backup directory"
-msgstr ""
+msgstr "Picons im Sicherungsverzeichnis sortieren"
 
 #: ../ui.py:747 ../ui.py:761
 msgid "Stream"
-msgstr ""
+msgstr "Stream"
 
 #: ../ui.py:983
 msgid "Swap Dirs"
-msgstr ""
+msgstr "Verzeichnisse tauschen"
 
 #: ../ui.py:752 ../ui.py:761
 msgid "Terrestrial"
-msgstr ""
+msgstr "Terrestrisch"
 
 #: ../ui.py:1029
 msgid "ZAP when is changed service"
-msgstr ""
+msgstr "Umschalten, wenn Dienst geändert wird"
 
 #: ../ui.py:61
 msgid "all"
-msgstr ""
+msgstr "alle"
 
 #: ../ui.py:54
 msgid "all picon's directories"
-msgstr ""
+msgstr "alle Piconverzeichnisse"
 
 #: ../ui.py:61
 msgid "as names only"
-msgstr ""
+msgstr "nur als Namen"
 
 #: ../ui.py:61
 msgid "as service reference only"
-msgstr ""
+msgstr "nur als Dienstreferenz"
 
 #: ../ui.py:60
 msgid "by orbital position"
-msgstr ""
+msgstr "nach Orbitalposition"
 
 #: ../ui.py:60
 msgid "by providers"
-msgstr ""
+msgstr "nach Anbietern"
 
 #: ../ui.py:233
 msgid "current:"
-msgstr ""
+msgstr "aktuell:"
 
 #: ../ui.py:165
 msgid "delete selected picon"
-msgstr ""
+msgstr "Ausgewähltes Picon löschen"
 
 #: ../ui.py:142 ../ui.py:153
 msgid "exit plugin"
-msgstr ""
+msgstr "Plugin beenden"
 
 #: ../ui.py:56
 msgid "filename"
-msgstr ""
+msgstr "Dateiname"
 
 #: ../ui.py:1175
 msgid "free:"
-msgstr ""
+msgstr "frei:"
 
 #: ../ui.py:56
 msgid "full path"
-msgstr ""
+msgstr "vollständiger Pfad"
 
-#: ../ui.py:163
-msgid "go to +100 picons"
-msgstr ""
-
+#: ../ui.py:159 ../ui.py:160 ../ui.py:161 ../ui.py:162 ../ui.py:163
 #: ../ui.py:164
-msgid "go to +1000 picons"
-msgstr ""
-
-#: ../ui.py:162
-msgid "go to +5 picons"
-msgstr ""
-
-#: ../ui.py:160
-msgid "go to -100 picons"
-msgstr ""
-
-#: ../ui.py:161
-msgid "go to -1000 picons"
-msgstr ""
-
-#: ../ui.py:159
-msgid "go to -5 picons"
-msgstr ""
+#, python-format
+msgid "go to %s picons"
+msgstr "zu %s Picons gehen"
 
 #: ../ui.py:157
 msgid "go to first picon"
-msgstr ""
+msgstr "zum ersten Picon gehen"
 
 #: ../ui.py:158
 msgid "go to last picon"
-msgstr ""
+msgstr "zum letzten Picon gehen"
 
 #: ../ui.py:150
 msgid "go to next picon"
-msgstr ""
+msgstr "zum nächsten Picon gehen"
 
 #: ../ui.py:151
 msgid "go to next service"
-msgstr ""
+msgstr "zum nächsten Dienst gehen"
 
 #: ../ui.py:149
 msgid "go to previous picon"
-msgstr ""
+msgstr "zum vorherigen Picon gehen"
 
 #: ../ui.py:152
 msgid "go to previous service"
-msgstr ""
+msgstr "zum vorherigen Dienst gehen"
 
 #: ../ui.py:54
 msgid "input directory only"
-msgstr ""
+msgstr "nur Eingabeverzeichnis"
 
 #: ../ui.py:1171
 msgid "mem:"
-msgstr ""
+msgstr "Speicher:"
 
 #: ../ui.py:148
 msgid "menu"
-msgstr ""
+msgstr "Menü"
 
 #: ../ui.py:51
 msgid "name"
-msgstr ""
+msgstr "Name"
 
 #: ../ui.py:56 ../ui.py:60
 msgid "no"
-msgstr ""
+msgstr "nein"
 
 #: ../ui.py:156
 msgid "options"
-msgstr ""
+msgstr "Optionen"
 
 #: ../ui.py:166
 msgid "refresh"
-msgstr ""
+msgstr "Aktualisieren"
 
 #: ../ui.py:154
 msgid "save service's picon"
-msgstr ""
+msgstr "Picon des Dienstes speichern"
 
 #: ../ui.py:155
 msgid "search picons or service"
-msgstr ""
+msgstr "Picons oder Dienst suchen"
 
 #: ../ui.py:51
 msgid "service reference"
-msgstr ""
+msgstr "Dienstreferenz"
 
 #: ../ui.py:143
 msgid "set and save selected picon"
-msgstr ""
+msgstr "Ausgewähltes Picon setzen und speichern"
 
 #: ../plugin.py:45
 msgid "set picon to service"
-msgstr ""
+msgstr "Picon einem Dienst zuweisen"
 
 #: ../ui.py:63
 msgid "sorted"
-msgstr ""
+msgstr "sortiert"
 
 #: ../ui.py:63
 msgid "sorted in reverse order"
-msgstr ""
+msgstr "sortiert in umgekehrter Reihenfolge"
 
 #: ../ui.py:168
 msgid "switch searching to picons"
-msgstr ""
+msgstr "Suche auf Picons umschalten"
 
 #: ../ui.py:167
 msgid "switch searching to service"
-msgstr ""
+msgstr "Suche auf Dienst umschalten"
 
 #: ../ui.py:802
 msgid "unknown"
-msgstr ""
+msgstr "unbekannt"
 
 #: ../ui.py:63
 msgid "unsorted"
-msgstr ""
+msgstr "unsortiert"
 
 #: ../ui.py:1173
 msgid "used:"
-msgstr ""
+msgstr "genutzt:"

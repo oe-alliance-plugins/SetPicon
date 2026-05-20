@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SetPicon\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-12 22:37+0200\n"
+"POT-Creation-Date: 2026-05-20 16:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,28 +301,10 @@ msgstr ""
 msgid "full path"
 msgstr ""
 
-#: ../ui.py:163
-msgid "go to +100 picons"
-msgstr ""
-
+#: ../ui.py:159 ../ui.py:160 ../ui.py:161 ../ui.py:162 ../ui.py:163
 #: ../ui.py:164
-msgid "go to +1000 picons"
-msgstr ""
-
-#: ../ui.py:162
-msgid "go to +5 picons"
-msgstr ""
-
-#: ../ui.py:160
-msgid "go to -100 picons"
-msgstr ""
-
-#: ../ui.py:161
-msgid "go to -1000 picons"
-msgstr ""
-
-#: ../ui.py:159
-msgid "go to -5 picons"
+#, python-format
+msgid "go to %s picons"
 msgstr ""
 
 #: ../ui.py:157
